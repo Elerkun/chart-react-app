@@ -10,12 +10,14 @@ import {
   Tooltip,
   Legend,
   Filler,
+  LogarithmicScale,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import 'chartjs-adapter-moment';
 
 ChartJS.register(
   TimeScale,
+  LogarithmicScale,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -26,29 +28,30 @@ ChartJS.register(
   Filler
 );
 
-const power = [6, 7, 10, 4, 5, 8, 9];
-const power2 = [1, 3, 2, 2, 4, 4, 5, 3, 2];
-//const labels = ["10:00", "10:05", "10:10", "10:15", "10:20", "10:25", "10:30"];
-const meterData = [{
-  x: '2021-11-06 23:39:30',
-  y: 10
-}, {
-  x: '2021-11-06 01:00:28',
-  y: 9
-}, {
-  x: '2021-11-07 09:00:28',
-  y: 8
-}];
-const powerSet = [{
-  x: '2021-11-06 23:40:35',
-  y: 3
-}, {
-  x: '2021-11-06 01:00:28',
-  y: 6
-}, {
-  x: '2021-11-06 09:00:28',
-  y: 3
-}];
+const power = [80, 200, 400, 600, 1000, 2000, 3000, 4000, 5000];
+const power2 = [3, 3.5, 7, 9, 10, 0, 10, 13, 0, 0];
+const labels = ["2021-11-06 09:00:28", "2021-11-06 09:01:30", "2021-11-06 09:01:35", "2021-11-06 09:01:45", "2021-11-06 09:02:04",
+                "2021-11-06 11:00:28", "2021-11-06 12:40:35", "2021-11-06 13:00:28", "2021-11-06 14:00:28", "2021-11-06 15:00:28"];
+// const meterData = [{
+//   x: '2021-11-06 23:39:30',
+//   y: 10
+// }, {
+//   x: '2021-11-06 01:00:28',
+//   y: 9
+// }, {
+//   x: '2021-11-07 09:00:28',
+//   y: 8
+// }];
+// const powerSet = [{
+//   x: '2021-11-06 23:40:35',
+//   y: 3
+// }, {
+//   x: '2021-11-06 01:00:28',
+//   y: 6
+// }, {
+//   x: '2021-11-06 09:00:28',
+//   y: 3
+// }];
 const options = {
       responsive: true,
       interaction: {
@@ -64,11 +67,16 @@ const options = {
       },
       scales: {
         y: {
-          beginAtZero: true,
-          type: 'linear',
+          min:10,
           display: true,
-          position: 'left',
+          type: 'logarithmic',
         },
+        // y: {
+        //   beginAtZero: true,
+        //   type: 'linear',
+        //   display: true,
+        //   position: 'left',
+        // },
         // y1: {
         //     beginAtZero: true,
         //   type: 'linear',
@@ -80,10 +88,10 @@ const options = {
           time: {
             unit: 'minute',
             // format: 'HH:mm',
-            stepSize: 15,
+            stepSize: 20,
             //unitStepSize: 15,
             displayFormats: {
-              'minute': 'DD MMM YYY HH:mm',
+              'minute': 'HH:mm',
               'hour': 'HH',
               'day': 'DD'
             },
@@ -98,7 +106,7 @@ export const LineChart = () => {
       datasets: [
         {
           label: "Meter Data",
-          data: meterData,
+          data: power,
           tension: 0.3,
           borderColor: "rgb(75, 192, 192)",
           pointRadius: 6,
@@ -106,17 +114,17 @@ export const LineChart = () => {
           backgroundColor: "rgba(75, 192, 192, 0.3)",
          //yAxisID: 'y',
         },
-        {
-          label: "Power Set",
-          tension: 0.3,
-          data: powerSet,
-          borderColor: "green",
-          backgroundColor: "rgba(0, 255, 0, 0.3)",
-          pointRadius: 6,
-         //yAxisID: 'y1',
-        },
+        // {
+        //   label: "Power Set",
+        //   tension: 0.3,
+        //   data: power2,
+        //   borderColor: "green",
+        //   backgroundColor: "rgba(0, 255, 0, 0.3)",
+        //   pointRadius: 6,
+        //  //yAxisID: 'y1',
+        // },
       ],
-      //labels,
+      labels,
     };
   }, []);
   return <Line data={data} options={options} />;
