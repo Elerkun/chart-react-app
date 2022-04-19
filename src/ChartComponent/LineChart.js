@@ -146,7 +146,7 @@ const options = () => ({
             stepSize: 15,
             //unitStepSize: 15,
             displayFormats: {
-              'minute': 'HH:mm',
+              'minute': 'DD MM HH:mm',
               'hour': 'HH',
               'day': 'DD MMM HH:mm'
             },
