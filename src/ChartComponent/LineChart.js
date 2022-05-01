@@ -78,11 +78,11 @@ const controlPlanInfo = controlPlanData.flat(Infinity).map((setControlPlanTime) 
 })).sort((a, b) => (a.x > b.x ? 1 : -1));
 meterDataValues.push(useAcks);
 meterDataValues.push(controlPlanData);
-const timeFormated = meterDataValues.flat(Infinity).map((v) => ({
-  x: generateEpoch().formatDateToChart(v.x),
-  y: v.y,
-  reason: v.reason ? v.reason : '',
-}));
+// const timeFormated = meterDataValues.flat(Infinity).map((v) => ({
+//   x: generateEpoch().formatDateToChart(v.x),
+//   y: v.y,
+//   reason: v.reason ? v.reason : '',
+// }));
 const labels = [];// timeFormated.sort((a, b) => a.x > b.x ? 1: -1);
 const startTime = Math.max.apply(null, labels.map((v) => new Date(v.x)));
 const endTime = Math.min.apply(null, labels.map((v) => new Date(v.x)));
