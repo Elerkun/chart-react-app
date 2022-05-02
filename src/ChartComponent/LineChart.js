@@ -55,6 +55,12 @@ export const generateEpoch = () => {
 };
 const useAcks = getAcks(appliedSetPoint);
 const controlPlanData = getAcksControlPlan(controlPlan.controlPlans.map((v) => v.data));
+/* Creating an array of objects with the following structure:
+[{
+  time: Date,
+  trendIdValue: Number,
+  trendIdKeyMeasureUnit: String
+}] */
 const setTimeMeterData = meterData.meterDataTrendFlatTableDTOList.flatMap((current) => current.meterDataEntityList.map((entityList) => ({
   time: new Date(current.timestamp),
   trendIdValue: entityList.trendIdValue,
